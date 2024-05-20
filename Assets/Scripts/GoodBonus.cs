@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,8 @@ namespace BillyBall
     public class GoodBonus : InteractiveObject, Interaction
     {
         [SerializeField] private Player _player;
-        private float bonusSpeed = 50f;
+        private float _bonusSpeed = 25f;
+        private int _bonusXP = 50;
 
         private void OnTriggerEnter(Collider collider)
         {
@@ -22,11 +24,13 @@ namespace BillyBall
         {
             if (gameObject.CompareTag("SpeedBonus"))
             {
-                _player.Speed += bonusSpeed;
+                _player.Speed += _bonusSpeed;
+                EventManager.OnAddSpeed();
             }
             else if (gameObject.CompareTag("XPBonus")) 
             {
-                _player.XP += 50;
+                _player.XP += _bonusXP;
+                EventManager.OnAddXP();
             }
         }
     }

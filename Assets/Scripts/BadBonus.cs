@@ -14,12 +14,16 @@ namespace BillyBall
             {
                 Interact();
             }
-            Destroy(gameObject, 0.2f);
         }
 
         protected override void Interact()
         {
-            _player.Speed -= 25;
+            if (_player.Speed > 25)
+            {
+                Destroy(gameObject, 0.2f);
+                _player.Speed -= 25;
+                EventManager.OnMinusSpeed();
+            }
         }
     }
 }
